@@ -16,7 +16,7 @@ function varbase_faqs_install() {
     ->set('show_expand_all', 1)
     ->set('back_to_top', '')
     ->set('disable_node_links', 1)
-    ->set('category_display', 'categories_inline')
+    ->set('category_display', 'none')
     ->save();
 
   // Add FAQs menu link to the main menu.

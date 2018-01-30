@@ -1,0 +1,31 @@
+{
+  "name": "drupal/varbase_faqs",
+  "description": "Provides FAQ content type and related configuration. A frequently asked question and its answer.",
+  "type": "drupal-module",
+  "homepage": "https://www.drupal.org/project/varbase_faqs",
+  "license": "GPL-2.0-or-later",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Vardot",
+      "homepage": "https://www.drupal.org/vardot",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/varbase_faqs",
+    "source": "http://cgit.drupalcode.org/varbase_faqs"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {},
+  "extra": {
+    "branch-alias": {
+      "dev-8.x-4.x": "8.4.x-dev"
+    }
+  }
+}
