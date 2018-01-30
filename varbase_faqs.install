@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * @file
+ * Contains varbase_faqs.install.
+ */
+
+ use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Implements hook_install().
+ */
+function varbase_faqs_install() {
+  $faq_settings = \Drupal::configFactory()->getEditable('faq.settings')
+    ->set('display', 'hide_answer')
+    ->set('show_expand_all', 1)
+    ->set('back_to_top', '')
+    ->set('disable_node_links', 1)
+    ->set('category_display', 'categories_inline')
+    ->save();
+
+  // Add FAQs menu link to the main menu.
+  $menu_link = MenuLinkContent::create([
+    'title' => 'FAQs',
+    'link' => ['uri' => 'internal:/faq-page'],
+    'menu_name' => 'main',
+    'expanded' => TRUE,
+    'id' => 9,
+  ]);
+  $menu_link->save();
+}

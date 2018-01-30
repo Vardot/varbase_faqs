@@ -1,0 +1,22 @@
+name: 'Varbase FAQ'
+description: 'Provides FAQ content type and related configuration. A frequently asked question and its answer.'
+type: module
+core: 8.x
+dependencies:
+  - block
+  - block_class
+  - faq
+  - field
+  - language
+  - menu_ui
+  - node
+  - panelizer
+  - path
+  - rabbit_hole
+  - system
+  - taxonomy
+  - text
+  - user
+  - views
+package: Varbase
+version: 8.x-4.x-dev

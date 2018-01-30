@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * Contains varbase_faqs.module.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function varbase_faqs_page_attachments(array &$page) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  if (substr($current_path, 1, 3) == 'faq') {
+    $page['#attached']['library'][] = 'varbase_faqs/faq-styles';
+  }
+}
