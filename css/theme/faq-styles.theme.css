@@ -24,6 +24,9 @@
 .faq-answer {
   padding-bottom: 15px;
 }
+.faq-answer a {
+  color: #328ec7;
+}
 #faq-expand-all a {
   font-size: 16px;
   color: #696969;
