@@ -18,14 +18,4 @@ function varbase_faqs_install() {
     ->set('disable_node_links', 1)
     ->set('category_display', 'none')
     ->save();
-
-  // Add FAQs menu link to the main menu.
-  $menu_link = MenuLinkContent::create([
-    'title' => 'FAQs',
-    'link' => ['uri' => 'internal:/faq-page'],
-    'menu_name' => 'main',
-    'expanded' => TRUE,
-    'id' => 9,
-  ]);
-  $menu_link->save();
 }

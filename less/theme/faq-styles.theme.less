@@ -1,5 +1,3 @@
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
 .faq-question-answer {
   padding-left: 0;
   background: white;
@@ -20,20 +18,16 @@
     }
   }
 
-  span {
+  span.glyphicon {
     &:before {
-      content: "\f105";
-      font-family: Fontawesome;
-      padding-right: 10px;
+      content: "\e080";
     }
   }
 
   .faq-qa-visible {
-    span {
+    span.glyphicon {
       &:before {
-      content: "\f107";
-      font-family: Fontawesome;
-      padding-right: 10px;
+      content: "\e114";
       }
     }
   }
@@ -41,6 +35,10 @@
 
 .faq-answer {
   padding-bottom: 15px;
+
+  a {
+    color:#328ec7;
+  }
 }
 
 #faq-expand-all {
