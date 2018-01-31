@@ -14,3 +14,14 @@ function varbase_faqs_page_attachments(array &$page) {
     $page['#attached']['library'][] = 'varbase_faqs/faq-styles';
   }
 }
+/**
+ * Implements hook_theme().
+ */
+function varbase_faqs_theme() {
+    return array(
+    'faq_hide_answer' => array(
+      'template' => 'faq-hide-answer',
+      'variables' => array('data' => NULL),
+    ),
+  );
+}
