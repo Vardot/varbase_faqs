@@ -9,19 +9,20 @@
  * Implements hook_page_attachments().
  */
 function varbase_faqs_page_attachments(array &$page) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  if (substr($current_path, 1, 3) == 'faq') {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if (substr($route_name, 0, 3) == 'faq') {
     $page['#attached']['library'][] = 'varbase_faqs/faq-styles';
   }
 }
+
 /**
  * Implements hook_theme().
  */
 function varbase_faqs_theme() {
-    return array(
-    'faq_hide_answer' => array(
+  return [
+    'faq_hide_answer' => [
       'template' => 'faq-hide-answer',
-      'variables' => array('data' => NULL),
-    ),
-  );
+      'variables' => ['data' => NULL],
+    ],
+  ];
 }
