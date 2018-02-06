@@ -19,7 +19,6 @@ dependencies:
   - taxonomy
   - text
   - user
-  - varbase_faqs
   - views
 package: Varbase
 version: 8.x-4.x-dev
