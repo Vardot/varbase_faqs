@@ -33,9 +33,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
-  sharethis:
-    weight: 10
-    region: content
 hidden:
   field_detailed_question: true
   langcode: true
