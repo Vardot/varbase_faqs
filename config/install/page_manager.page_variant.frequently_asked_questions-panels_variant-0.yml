@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.frequently_asked_questions
+  module:
+    - faq
+    - panels
+    - varbase_faqs
+id: frequently_asked_questions-panels_variant-0
+label: 'Frequently Asked Questions'
+variant: panels_variant
+variant_settings:
+  blocks:
+    40874a43-ebc1-4985-af1a-b4a0c0e03c94:
+      id: faqs_list
+      label: 'FAQs List'
+      provider: varbase_faqs
+      label_display: '0'
+      region: main
+      weight: 0
+      uuid: 40874a43-ebc1-4985-af1a-b4a0c0e03c94
+      context_mapping: {  }
+    b4f53363-57ed-4b9d-9a16-087077b016fa:
+      id: faq_categories
+      label: 'FAQ Categories'
+      provider: faq
+      label_display: '0'
+      region: main
+      weight: 0
+      uuid: b4f53363-57ed-4b9d-9a16-087077b016fa
+      context_mapping: {  }
+  id: panels_variant
+  uuid: 52d4f51c-66eb-4f52-9f49-124e0fa301e3
+  label: null
+  weight: 0
+  layout: bs_1col
+  layout_settings:
+    layout:
+      wrapper: div
+      classes:
+        row: row
+      add_layout_class: 1
+      attributes: ''
+    regions:
+      main:
+        wrapper: div
+        classes:
+          col-sm-12: col-sm-12
+        add_region_classes: 1
+        attributes: ''
+  page_title: 'Frequently Asked Questions'
+  storage_type: page_manager
+  storage_id: frequently_asked_questions-panels_variant-0
+  builder: standard
+page: frequently_asked_questions
+weight: 0
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

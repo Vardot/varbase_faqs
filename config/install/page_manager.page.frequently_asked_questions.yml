@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: frequently_asked_questions
+label: 'Frequently Asked Questions'
+description: ''
+use_admin_theme: false
+path: /faqs
+access_logic: and
+access_conditions: {  }
+parameters: {  }
