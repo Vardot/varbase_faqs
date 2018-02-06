@@ -21,6 +21,9 @@
 .faq-question-answer .faq-qa-visible span.glyphicon:before {
   content: "\e114";
 }
+.faq-question-answer .faq-question {
+  padding-left: 0;
+}
 .faq-answer {
   padding-bottom: 15px;
 }
@@ -63,4 +66,16 @@
   border-bottom: solid 2px #29aae1;
   text-decoration: none;
   background: transparent;
+}
+*[dir="rtl"] .faq-question-answer span.glyphicon:before {
+  content: "\e079";
+}
+*[dir="rtl"] .faq-question-answer .faq-answer {
+  padding-right: 40px;
+}
+*[dir="rtl"] .faq-qa-visible span.glyphicon:before {
+  content: "\e114";
+}
+*[dir="rtl"] .faq #faq-expand-all {
+  text-align: left;
 }

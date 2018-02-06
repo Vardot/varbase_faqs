@@ -31,6 +31,10 @@
       }
     }
   }
+
+  .faq-question {
+    padding-left: 0;
+  }
 }
 
 .faq-answer {
@@ -81,5 +85,31 @@
         }
       }
     }
+  }
+}
+
+*[dir="rtl"] {
+  .faq-question-answer {
+    span.glyphicon {
+      &:before {
+        content: "\e079";
+      }
+    }
+
+    .faq-answer {
+      padding-right: 40px;
+    }
+  }
+
+  .faq-qa-visible {
+    span.glyphicon {
+      &:before {
+      content: "\e114";
+      }
+    }
+  }
+
+  .faq #faq-expand-all {
+    text-align: left;
   }
 }
