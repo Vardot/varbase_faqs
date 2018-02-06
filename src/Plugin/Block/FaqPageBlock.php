@@ -14,8 +14,8 @@ use Drupal\Component\Render\FormattableMarkup;
  * Provides a simple block.
  *
  * @Block(
- *   id = "faq_page",
- *   admin_label = @Translation("FAQs")
+ *   id = "faqs_list",
+ *   admin_label = @Translation("FAQs List")
  * )
  */
 class FaqPageBlock extends BlockBase {
@@ -24,6 +24,9 @@ class FaqPageBlock extends BlockBase {
    * Implements \Drupal\block\BlockBase::blockBuild().
    */
   public function build() {
+    $tid = 0;
+    $faq_display = '';
+    $category_display = '';
     $faq_settings = \Drupal::configFactory()->get('faq.settings');
 
     $output = $output_answers = '';

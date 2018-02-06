@@ -10,13 +10,17 @@ dependencies:
   - language
   - menu_ui
   - node
+  - page_manager
   - panelizer
+  - panels
   - path
   - rabbit_hole
   - system
   - taxonomy
   - text
   - user
+  - varbase_faqs
+  - vardoc_book
   - views
 package: Varbase
 version: 8.x-4.x-dev
