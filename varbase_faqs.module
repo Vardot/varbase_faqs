@@ -10,9 +10,9 @@
  */
 function varbase_faqs_page_attachments(array &$page) {
   $route_name = \Drupal::routeMatch()->getRouteName();
-  if (substr($route_name, 0, 3) == 'faq') {
+  // if (substr($route_name, 0, 3) == 'faq') {
     $page['#attached']['library'][] = 'varbase_faqs/faq-styles';
-  }
+  // }
 }
 
 /**
