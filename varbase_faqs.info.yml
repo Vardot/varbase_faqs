@@ -7,7 +7,6 @@ dependencies:
   - block_class
   - faq
   - field
-  - language
   - menu_ui
   - node
   - page_manager
