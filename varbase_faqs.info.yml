@@ -10,7 +10,6 @@ dependencies:
   - menu_ui
   - node
   - page_manager
-  - panelizer
   - panels
   - path
   - rabbit_hole
