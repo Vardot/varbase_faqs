@@ -6,15 +6,9 @@ dependencies:
     - field.field.node.faq.field_detailed_question
     - node.type.faq
   module:
-    - panelizer
     - text
     - user
 third_party_settings:
-  panelizer:
-    enable: false
-    custom: false
-    allow: false
-    default: default
 id: node.faq.default
 targetEntityType: node
 bundle: faq

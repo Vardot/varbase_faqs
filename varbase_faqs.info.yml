@@ -2,6 +2,9 @@ name: 'Varbase FAQ'
 description: 'Provides FAQ content type and related configuration. A frequently asked question and its answer.'
 type: module
 core: 8.x
+project: varbase_faqs
+package: Varbase
+version: 8.x-6.x-dev
 dependencies:
   - block
   - block_class
@@ -10,7 +13,6 @@ dependencies:
   - menu_ui
   - node
   - page_manager
-  - panelizer
   - panels
   - path
   - rabbit_hole
@@ -19,5 +21,4 @@ dependencies:
   - text
   - user
   - views
-package: Varbase
-version: 8.x-6.x-dev
+
