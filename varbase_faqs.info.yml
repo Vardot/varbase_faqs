@@ -6,19 +6,10 @@ project: varbase_faqs
 package: Varbase
 version: 8.x-6.x-dev
 dependencies:
-  - block
-  - block_class
-  - faq
-  - field
-  - menu_ui
-  - node
-  - page_manager
-  - panels
-  - path
-  - rabbit_hole
-  - system
-  - taxonomy
-  - text
-  - user
-  - views
-
+  - varbase_core:varbase_core
+  - drupal:menu_ui
+  - block_class:block_class
+  - faq:faq
+  - page_manager:page_manager
+  - panels:panels
+  - rabbit_hole:rabbit_hole
