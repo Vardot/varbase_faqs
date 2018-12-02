@@ -27,7 +27,10 @@
     }
   },
   "require": {
-    "drupal/faq": "1.x-dev#2bdc0f0fd3fa1941bf7d3579a498e6f40ca9c69a"
+    "drupal/faq": "1.x-dev#2bdc0f0fd3fa1941bf7d3579a498e6f40ca9c69a",
+    "drupal/rabbit_hole": "~1",
+    "drupal/page_manager": "~4",
+    "drupal/panels": "~4"
   },
   "extra": {
     "branch-alias": {

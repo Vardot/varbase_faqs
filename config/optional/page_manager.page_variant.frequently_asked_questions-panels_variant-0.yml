@@ -6,7 +6,6 @@ dependencies:
   module:
     - faq
     - panels
-    - varbase_faqs
 id: frequently_asked_questions-panels_variant-0
 label: 'Frequently Asked Questions'
 variant: panels_variant
