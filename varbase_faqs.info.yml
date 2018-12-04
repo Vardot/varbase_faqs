@@ -6,7 +6,10 @@ project: varbase_faqs
 package: Varbase
 version: 8.x-5.x-dev
 dependencies:
-  - varbase_core:varbase_core
+  - drupal:user
+  - drupal:node
+  - drupal:path
+  - drupal:text
   - drupal:menu_ui
   - block_class:block_class
   - faq:faq
