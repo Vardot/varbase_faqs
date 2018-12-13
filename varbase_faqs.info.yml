@@ -15,6 +15,5 @@ dependencies:
   - rabbit_hole:rh_node
 install:
   - menu_ui
-  - block_class
   - page_manager
   - panels
