@@ -27,14 +27,14 @@
     }
   },
   "require": {
-    "composer/installers": "~1",
-    "oomphinc/composer-installers-extender": "~1",
-    "cweagans/composer-patches": "~1",
+    "composer/installers": "~1.0",
+    "oomphinc/composer-installers-extender": "~1.0",
+    "cweagans/composer-patches": "~1.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
     "drupal/faq": "1.x-dev#2bdc0f0fd3fa1941bf7d3579a498e6f40ca9c69a",
-    "drupal/rabbit_hole": "~1",
-    "drupal/page_manager": "~4",
-    "drupal/panels": "~4"
+    "drupal/rabbit_hole": "~1.0",
+    "drupal/page_manager": "~4.0",
+    "drupal/panels": "~4.0"
   },
   "extra": {
     "branch-alias": {
