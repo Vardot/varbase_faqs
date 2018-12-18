@@ -21,15 +21,6 @@ variant_settings:
       weight: 0
       uuid: 40874a43-ebc1-4985-af1a-b4a0c0e03c94
       context_mapping: {  }
-    b4f53363-57ed-4b9d-9a16-087077b016fa:
-      id: faq_categories
-      label: 'FAQ Categories'
-      provider: faq
-      label_display: '0'
-      region: content
-      weight: 0
-      uuid: b4f53363-57ed-4b9d-9a16-087077b016fa
-      context_mapping: {  }
   id: panels_variant
   uuid: 52d4f51c-66eb-4f52-9f49-124e0fa301e3
   label: null
