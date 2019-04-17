@@ -31,7 +31,7 @@
     "oomphinc/composer-installers-extender": "~1.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
-    "drupal/faq": "1.x-dev#2bdc0f0fd3fa1941bf7d3579a498e6f40ca9c69a",
+    "drupal/faq": "~1.0",
     "drupal/rabbit_hole": "~1.0",
     "drupal/page_manager": "~4.0",
     "drupal/panels": "~4.0"
@@ -41,12 +41,6 @@
       "dev-8.x-6.x": "8.6.x-dev"
     },
     "enable-patching": true,
-    "composer-exit-on-patch-failure": true,
-    "patches": {
-      "drupal/faq": {
-        "Issue #2932028: Unable to place FAQ Categories block.":
-        "https://www.drupal.org/files/issues/unable-to-add-faq-block-2932028-9.patch"
-      }
-    }
+    "composer-exit-on-patch-failure": true
   }
 }
