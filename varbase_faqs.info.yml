@@ -17,3 +17,6 @@ install:
   - menu_ui
   - page_manager
   - panels
+  - length_indicator
+  - advanced_text_formatter
+  - maxlength
