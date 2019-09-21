@@ -5,7 +5,6 @@ namespace Drupal\varbase_faqs\Plugin\Block;
 use Drupal\faq\FaqHelper;
 use Drupal\Core\Block\BlockBase;
 use Drupal\taxonomy\Entity\Vocabulary;
-use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Database\Query\Condition;
 use Drupal\node\Entity\Node;
 use Drupal\Component\Render\FormattableMarkup;

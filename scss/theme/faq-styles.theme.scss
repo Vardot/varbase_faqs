@@ -1,0 +1,131 @@
+// Varbase Frequently Asked Questions style.
+// -----------------------------------------------------------------------------
+@import "../../node_modules/bootstrap/scss/functions"; // Bootstrap functions.
+@import "../../node_modules/bootstrap/scss/mixins";    // Bootstrap mixins.
+@import "../../node_modules/bootstrap/scss/variables"; // Bootstrap variables.
+@import "../variables.scss";
+// -----------------------------------------------------------------------------
+ 
+.faq-question-answer {
+  padding-left: 0;
+  background: white;
+  border-bottom: 1px solid $faq-question-border-color;
+  cursor: pointer;
+  padding: 19px 0;
+  position: relative;
+  z-index: 2;
+  padding-left: 0;
+
+  a {
+    @media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+      @include font-size(1.4rem);
+    }
+    color: $faq-question-link-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $faq-question-link-active-color;
+    }
+  }
+
+  span.faq-icon {
+    display: inline-block;
+    background-image: $chevron-right-icon;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 1em;
+    height: 1em;
+  }
+
+  .faq-qa-visible {
+    span.faq-icon {
+      background-image: $chevron-down-icon;
+    }
+  }
+
+  .faq-question {
+    padding-left: 0;
+  }
+}
+
+.faq-answer {
+  padding-bottom: 15px;
+
+  a {
+    color: $link-color;
+  }
+}
+
+#faq-expand-all {
+  a {
+    @media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+      @include font-size(1rem);
+    }
+
+    color: $faq-expand-all-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $faq-expand-all-active-color;
+    }
+  }
+}
+
+#block-faq-categories,
+.block-faq-categories {
+  text-align: center;
+  margin: 20px auto;
+
+  ul {
+    li {
+      display: inline-block;
+      padding-right: 10px;
+      display: inline-block;
+      padding-left: 5px;
+      padding-right: 5px;
+
+      a {
+        @media screen and (min-width: map-get($grid-breakpoints, "lg")) {
+          @include font-size(1.5rem);
+        }
+        
+        color: $link-color;
+        padding: 0;
+        border-bottom: solid 2px transparent;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+          border-bottom: solid 2px $gray-200;
+          text-decoration: none;
+          background: transparent;
+        }
+      }
+    }
+  }
+}
+
+[dir="rtl"] {
+  .faq-question-answer {
+    span.faq-icon {
+      background-image: $chevron-left-icon;
+    }
+
+    .faq-answer {
+      padding-right: 40px;
+    }
+  }
+
+  .faq-qa-visible {
+    span.faq-icon {
+      background-image: $chevron-down-icon;
+    }
+  }
+
+  .faq #faq-expand-all {
+    text-align: left;
+  }
+}
