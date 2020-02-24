@@ -6,6 +6,8 @@ use Drupal\faq\FaqHelper;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Database\Query\Condition;
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
