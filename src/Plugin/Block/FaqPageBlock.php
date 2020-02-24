@@ -2,6 +2,7 @@
 
 namespace Drupal\varbase_faqs\Plugin\Block;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\faq\FaqHelper;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Database\Query\Condition;
