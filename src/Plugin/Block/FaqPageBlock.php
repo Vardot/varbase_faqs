@@ -14,6 +14,7 @@ use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Render\RendererInterface;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a simple block.
@@ -284,6 +285,13 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
     $build['#markup'] = $this->renderer->render($markup);
 
     return $build;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return Cache::mergeTags(parent::getCacheTags(), ['node_list']);
   }
 
 }
