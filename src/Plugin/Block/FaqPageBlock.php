@@ -4,10 +4,13 @@ namespace Drupal\varbase_faqs\Plugin\Block;
 
 use Drupal\faq\FaqHelper;
 use Drupal\Core\Block\BlockBase;
-use Drupal\taxonomy\Entity\Vocabulary;
 use Drupal\Core\Database\Query\Condition;
-use Drupal\node\Entity\Node;
 use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Render\RendererInterface;
 
 /**
  * Provides a simple block.
@@ -17,7 +20,91 @@ use Drupal\Component\Render\FormattableMarkup;
  *   admin_label = @Translation("FAQs List")
  * )
  */
-class FaqPageBlock extends BlockBase {
+class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Active database connection.
+   *
+   * @var \Drupal\Core\Database\Connection
+   */
+  protected $database;
+
+  /**
+   * Contains the configuration object factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * The module handler service.
+   *
+   * @var \Drupal\Core\Extension\ModuleHandlerInterface
+   */
+  protected $moduleHandler;
+
+  /**
+   * The language manager service.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Constructs a new FAQs List Block.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Database\Connection $database
+   *   The database connection to be used.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The factory for configuration objects.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler service.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+   *   The language manager service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
+   * @param \Drupal\Core\Render\RendererInterface $renderer
+   *   The renderer.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Connection $database, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, LanguageManagerInterface $language_manager, EntityTypeManagerInterface $entity_type_manager, RendererInterface $renderer) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->database = $database;
+    $this->configFactory = $config_factory;
+    $this->moduleHandler = $module_handler;
+    $this->languageManager = $language_manager;
+    $this->entityTypeManager = $entity_type_manager;
+    $this->renderer = $renderer;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('database'),
+      $container->get('config.factory'),
+      $container->get('module_handler'),
+      $container->get('language_manager'),
+      $container->get('entity_type.manager'),
+      $container->get('renderer')
+    );
+  }
 
   /**
    * Implements \Drupal\block\BlockBase::blockBuild().
@@ -26,7 +113,7 @@ class FaqPageBlock extends BlockBase {
     $tid = 0;
     $faq_display = '';
     $category_display = '';
-    $faq_settings = \Drupal::configFactory()->get('faq.settings');
+    $faq_settings = $this->configFactory->get('faq.settings');
 
     $output = $output_answers = '';
 
@@ -36,7 +123,7 @@ class FaqPageBlock extends BlockBase {
 
     $build['#title'] = $faq_settings->get('title');
 
-    if (!\Drupal::moduleHandler()->moduleExists('taxonomy')) {
+    if (!$this->moduleHandler->moduleExists('taxonomy')) {
       $tid = 0;
     }
 
@@ -44,7 +131,7 @@ class FaqPageBlock extends BlockBase {
     $use_categories = $faq_settings->get('use_categories');
     $category_display = $faq_settings->get('category_display');
     // If taxonomy doesn't installed, do not use categories.
-    if (!\Drupal::moduleHandler()->moduleExists('taxonomy')) {
+    if (!$this->moduleHandler->moduleExists('taxonomy')) {
       $use_categories = FALSE;
     }
 
@@ -59,9 +146,9 @@ class FaqPageBlock extends BlockBase {
       if (!empty($tid)) {
         throw new NotFoundHttpException();
       }
-      $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+      $langcode = $this->languageManager->getCurrentLanguage()->getId();
       $default_sorting = $faq_settings->get('default_sorting');
-      $query = \Drupal::database()->select('node', 'n');
+      $query = $this->database->select('node', 'n');
       $weight_alias = $query->leftJoin('faq_weights', 'w', '%alias.nid=n.nid');
       $query->leftJoin('node_field_data', 'd', 'd.nid=n.nid');
       $db_or = new Condition('OR');
@@ -90,8 +177,8 @@ class FaqPageBlock extends BlockBase {
 
       // Only need the nid column.
       $nids = $query->execute()->fetchCol();
-      $data = Node::loadMultiple($nids);
-      foreach ($data as $key => &$node) {
+      $data = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+      foreach ($data as &$node) {
         $node = ($node->hasTranslation($langcode)) ? $node->getTranslation($langcode) : $node;
       }
 
@@ -115,7 +202,7 @@ class FaqPageBlock extends BlockBase {
           $questions_to_render['#theme'] = 'faq_new_page';
           break;
       } // End of switch.
-      $output = \Drupal::service('renderer')->render($questions_to_render);
+      $output = $this->renderer->render($questions_to_render);
     }
 
     // Categorize questions.
@@ -124,10 +211,10 @@ class FaqPageBlock extends BlockBase {
 
       // If we're viewing a specific category/term.
       if (!empty($tid)) {
-        if ($term = Term::load($tid)) {
+        if ($term = $this->entityTypeManager->getStorage('taxonomy_term')->load($tid)) {
           $title = $faq_settings->get('title');
 
-          $build['#title'] = ($title . ($title ? ' - ' : '') . $this->t($term->getName()));
+          $build['#title'] = ($title . ($title ? ' - ' : '') . $term->getName());
 
           $this->_displayFaqByCategory($faq_display, $category_display, $term, 0, $output, $output_answers);
           $to_render = [
@@ -144,7 +231,7 @@ class FaqPageBlock extends BlockBase {
       }
 
       $list_style = $faq_settings->get('category_listing');
-      $vocabularies = Vocabulary::loadMultiple();
+      $vocabularies = $this->entityTypeManager->getStorage('taxonomy_vocabulary')->loadMultiple();
       $vocab_omit = $faq_settings->get('omit_vocabulary');
       $items = [];
       $vocab_items = [];
@@ -191,7 +278,7 @@ class FaqPageBlock extends BlockBase {
       '#answers' => new FormattableMarkup($output_answers, []),
       '#description' => new FormattableMarkup($faq_description, []),
     ];
-    $build['#markup'] = \Drupal::service('renderer')->render($markup);
+    $build['#markup'] = $this->renderer->render($markup);
 
     return $build;
   }

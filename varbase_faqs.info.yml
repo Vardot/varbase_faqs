@@ -5,6 +5,7 @@ core: 8.x
 project: varbase_faqs
 package: Varbase
 version: 8.x-6.x-dev
+core_version_requirement: ^8 || ^9
 dependencies:
   - drupal:user
   - drupal:node
