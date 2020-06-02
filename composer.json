@@ -37,7 +37,7 @@
     "drupal/page_manager": "~4.0",
     "drupal/panels": "~4.0",
     "drupal/length_indicator": "~1.0",
-    "drupal/advanced_text_formatter": "~1.0",
+    "drupal/advanced_text_formatter": "~2.0",
     "drupal/maxlength": "~1.0"
   },
   "extra": {
