@@ -3,6 +3,7 @@
 @import "../../node_modules/bootstrap/scss/functions"; // Bootstrap functions.
 @import "../../node_modules/bootstrap/scss/mixins";    // Bootstrap mixins.
 @import "../../node_modules/bootstrap/scss/variables"; // Bootstrap variables.
+@import "../../node_modules/rfs/scss";                 // RFS ~9.0 mixins.
 @import "../variables.scss";
 // -----------------------------------------------------------------------------
 
@@ -11,7 +12,7 @@
   background: white;
   border-bottom: 1px solid $faq-question-border-color;
   cursor: pointer;
-  padding: 19px 0;
+  @include padding(1.1875rem 0);
   position: relative;
   z-index: 2;
 
@@ -75,14 +76,14 @@
 #block-faq-categories,
 .block-faq-categories {
   text-align: center;
-  margin: 20px auto;
+  @include margin(1.25rem auto);
 
   ul {
     li {
       display: inline-block;
-      padding-right: 10px;
-      padding-left: 5px;
-      padding-right: 5px;
+      @include padding-right(0.625rem);
+      @include padding-left(0.3125rem);
+      @include padding-right(0.3125rem);
 
       a {
         @media screen and (min-width: map-get($grid-breakpoints, "lg")) {
@@ -113,7 +114,7 @@
     }
 
     .faq-answer {
-      padding-right: 40px;
+      @include padding-right(2.5rem);
     }
   }
 
