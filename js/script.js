@@ -3,18 +3,15 @@
  * Behaviors for the varbase_faqs.
  */
 
-(function ($, _, Drupal, drupalSettings) {
-  'use strict';
+(function($, _, Drupal) {
   Drupal.behaviors.cat = {
-    attach: function (context, settings) {
-      $(document).ready(function () {
-
+    attach: function() {
+      $(document).ready(function() {
         // Make the faqcategories active based on the current path.
-        var path = window.location.pathname;
-        var target = $('#block-faq-categories a[href="' + path + '"]');
-        target.addClass('active');
+        const path = window.location.pathname;
+        const target = $('#block-faq-categories a[href="' + path + '"]');
+        target.addClass("active");
       });
     }
   };
-
-})(window.jQuery, window._, window.Drupal, window.drupalSettings);
+})(window.jQuery, window._, window.Drupal);
