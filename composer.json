@@ -28,10 +28,10 @@
   },
   "require": {
     "composer/installers": "~1.0",
+		"composer/installers": "~1.0",
     "oomphinc/composer-installers-extender": "~1.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal/drupal-library-installer-plugin": "^0.3",
-    "drupal/core": "^8.8.0 || ~9.0.0",
+    "drupal/core": "^9 || ~10.0.0",
     "drupal/faq": "~1.0",
     "drupal/rabbit_hole": "~1.0",
     "drupal/page_manager": "~4.0",
@@ -41,9 +41,6 @@
     "drupal/maxlength": "~1.0"
   },
   "extra": {
-    "branch-alias": {
-      "dev-8.x-6.x": "8.6.x-dev"
-    },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true
   }
