@@ -6,13 +6,6 @@
  */
 
 /**
- * Implements hook_page_attachments().
- */
-function varbase_faqs_page_attachments(array &$page) {
-  $page['#attached']['library'][] = 'varbase_faqs/faq-styles';
-}
-
-/**
  * Implements hook_theme().
  */
 function varbase_faqs_theme() {
