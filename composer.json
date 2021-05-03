@@ -31,10 +31,8 @@
     "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/core": "~9.0",
-    "drupal/faq": "~1.0",
+    "drupal/faq": "1.x-dev",
     "drupal/rabbit_hole": "~1.0",
-    "drupal/page_manager": "~4.0",
-    "drupal/panels": "~4.0",
     "drupal/length_indicator": "~1.0",
     "drupal/advanced_text_formatter": "~2.0",
     "drupal/maxlength": "~1.0"
