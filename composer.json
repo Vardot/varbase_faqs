@@ -31,6 +31,7 @@
     "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
     "cweagans/composer-patches": "~1.0",
     "drupal/core": "~9.0",
+    "vardot/entity-definition-update-manager": "~1.0",
     "drupal/varbase_layout_builder": "~9.0 || 9.0.x-dev || ~10.0 || 10.0.x-dev",
     "drupal/faq": "~1.0",
     "drupal/rabbit_hole": "~1.0",
