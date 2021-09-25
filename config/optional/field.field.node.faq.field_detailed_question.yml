@@ -10,11 +10,11 @@ id: node.faq.field_detailed_question
 field_name: field_detailed_question
 entity_type: node
 bundle: faq
-label: 'Detailed Question'
-description: ''
+label: "Detailed Question"
+description: ""
 required: false
 translatable: true
-default_value: {  }
-default_value_callback: ''
-settings: {  }
+default_value: {}
+default_value_callback: ""
+settings: {}
 field_type: text_long

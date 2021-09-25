@@ -8,7 +8,7 @@ dependencies:
   module:
     - text
     - user
-third_party_settings:
+third_party_settings: {}
 id: node.faq.default
 targetEntityType: node
 bundle: faq
@@ -17,15 +17,15 @@ content:
   body:
     type: text_default
     weight: 1
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     label: hidden
     region: content
   path:
     type: path
     weight: 2
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     region: content
 hidden:
   field_detailed_question: true

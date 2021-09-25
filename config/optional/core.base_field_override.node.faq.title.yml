@@ -8,10 +8,10 @@ field_name: title
 entity_type: node
 bundle: faq
 label: Question
-description: ''
+description: ""
 required: true
 translatable: true
-default_value: {  }
-default_value_callback: ''
-settings: {  }
+default_value: {}
+default_value_callback: ""
+settings: {}
 field_type: string

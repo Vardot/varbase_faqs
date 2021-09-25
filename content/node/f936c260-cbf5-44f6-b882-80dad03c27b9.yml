@@ -1,71 +1,53 @@
 _meta:
-  version: '1.0'
+  version: "1.0"
   entity_type: node
   uuid: f936c260-cbf5-44f6-b882-80dad03c27b9
   bundle: landing_page_lb
   default_langcode: und
 default:
   revision_uid:
-    -
-      target_id: 1
+    - target_id: 1
   revision_log:
-    -
-      value: 'Create FAQs section Landing page (Layout Builder)'
+    - value: "Create FAQs section Landing page (Layout Builder)"
   status:
-    -
-      value: true
+    - value: true
   uid:
-    -
-      target_id: 1
+    - target_id: 1
   title:
-    -
-      value: 'Frequently Asked Questions'
+    - value: "Frequently Asked Questions"
   created:
-    -
-      value: 1620028100
+    - value: 1620028100
   promote:
-    -
-      value: false
+    - value: false
   sticky:
-    -
-      value: false
+    - value: false
   revision_translation_affected:
-    -
-      value: true
+    - value: true
   moderation_state:
-    -
-      value: published
+    - value: published
   path:
-    -
-      alias: /faqs
+    - alias: /faqs
       langcode: und
       pathauto: 0
   publish_state:
-    -
-      value: published
+    - value: published
   unpublish_state:
-    -
-      value: archived
+    - value: archived
   content_translation_source:
-    -
-      value: und
+    - value: und
   content_translation_outdated:
-    -
-      value: false
+    - value: false
   field_description:
-    -
-      value: 'Frequently Asked Questions'
+    - value: "Frequently Asked Questions"
   field_yoast_seo:
-    -
-      status: '0'
-      focus_keyword: ''
+    - status: "0"
+      focus_keyword: ""
   layout_builder__layout:
-    -
-      section:
-        layout_id: 'bootstrap_layout_builder:blb_col_1'
+    - section:
+        layout_id: "bootstrap_layout_builder:blb_col_1"
         layout_settings:
-          label: ''
-          container_wrapper_classes: ''
+          label: ""
+          container_wrapper_classes: ""
           container_wrapper_attributes: null
           container_wrapper:
             bootstrap_styles:
@@ -151,31 +133,31 @@ default:
               scroll_effects:
                 class: null
               background_edgetoedge: 1
-          container_wrapper_bg_color_class: ''
+          container_wrapper_bg_color_class: ""
           container_wrapper_bg_media: null
           container: container-fluid
-          section_classes: ''
+          section_classes: ""
           section_attributes: null
           regions_classes:
-            blb_region_col_1: ''
-            section_header: ''
+            blb_region_col_1: ""
+            section_header: ""
           regions_attributes:
-            blb_region_col_1: {  }
+            blb_region_col_1: {}
             section_header: null
-          breakpoints: {  }
+          breakpoints: {}
           layout_regions_classes:
             section_header: null
-          remove_gutters: '1'
+          remove_gutters: "1"
           gutters_between: null
         components:
           a625a1e9-278b-4e0f-a140-b3359dfa43b9:
             uuid: a625a1e9-278b-4e0f-a140-b3359dfa43b9
             region: blb_region_col_1
             configuration:
-              id: 'extra_field_block:node:landing_page_lb:content_moderation_control'
-              label: 'Moderation control'
+              id: "extra_field_block:node:landing_page_lb:content_moderation_control"
+              label: "Moderation control"
               provider: layout_builder
-              label_display: '0'
+              label_display: "0"
               context_mapping:
                 entity: layout_builder.entity
             additional:
@@ -263,13 +245,12 @@ default:
                   scroll_effects:
                     class: null
             weight: 0
-        third_party_settings: {  }
-    -
-      section:
-        layout_id: 'bootstrap_layout_builder:blb_col_1'
+        third_party_settings: {}
+    - section:
+        layout_id: "bootstrap_layout_builder:blb_col_1"
         layout_settings:
-          label: ''
-          container_wrapper_classes: ''
+          label: ""
+          container_wrapper_classes: ""
           container_wrapper_attributes: null
           container_wrapper:
             bootstrap_styles:
@@ -355,22 +336,22 @@ default:
                   class: _none
               scroll_effects:
                 class: null
-          container_wrapper_bg_color_class: ''
+          container_wrapper_bg_color_class: ""
           container_wrapper_bg_media: null
           container: container-fluid
-          section_classes: ''
+          section_classes: ""
           section_attributes: null
           regions_classes:
-            blb_region_col_1: ''
-            section_header: ''
+            blb_region_col_1: ""
+            section_header: ""
           regions_attributes:
-            blb_region_col_1: {  }
+            blb_region_col_1: {}
             section_header: null
-          breakpoints: {  }
+          breakpoints: {}
           layout_regions_classes:
             section_header: null
-          container_width: ''
-          remove_gutters: '1'
+          container_width: ""
+          remove_gutters: "1"
           gutters_between: null
         components:
           bed3178c-13e0-40ea-856f-0057bc222bcd:
@@ -378,10 +359,10 @@ default:
             region: blb_region_col_1
             configuration:
               id: faqs_list
-              label: 'FAQs List'
+              label: "FAQs List"
               provider: varbase_faqs
               label_display: 0
-              context_mapping: {  }
+              context_mapping: {}
             additional:
               bootstrap_styles:
                 block_style:
@@ -468,4 +449,4 @@ default:
                   scroll_effects:
                     class: null
             weight: 0
-        third_party_settings: {  }
+        third_party_settings: {}
