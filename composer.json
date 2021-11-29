@@ -32,7 +32,7 @@
     "cweagans/composer-patches": "~1.0",
     "drupal/core": "~9.0",
     "vardot/entity-definition-update-manager": "~1.0",
-    "drupal/varbase_layout_builder": "~9.0 || 9.0.x-dev || ~10.0 || 10.0.x-dev",
+    "drupal/varbase_layout_builder": "~10.1.0 || 10.1.x-dev",
     "drupal/faq": "~1.0",
     "drupal/rabbit_hole": "~1.0",
     "drupal/length_indicator": "~1.0",
