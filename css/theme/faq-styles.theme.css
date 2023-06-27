@@ -10,13 +10,11 @@
 .faq-question-answer a {
   color: #6c757d;
 }
-
 @media screen and (min-width: 992px) {
   .faq-question-answer a {
     font-size: calc(1.265rem + 0.18vw);
   }
 }
-
 @media screen and (min-width: 992px) and (min-width: 1200px) {
   .faq-question-answer a {
     font-size: 1.4rem;
@@ -46,13 +44,12 @@
   padding-bottom: 15px;
 }
 .faq-answer a {
-  color: #007bff;
+  color: #0d6efd;
 }
 
 #faq-expand-all a {
   color: #6c757d;
 }
-
 @media screen and (min-width: 992px) {
   #faq-expand-all a {
     font-size: 1rem;
@@ -79,17 +76,15 @@
 #block-faq-categories ul li a,
 .block-faq-categories ul li a {
   padding: 0;
-  color: #007bff;
+  color: #0d6efd;
   border-bottom: solid 2px transparent;
 }
-
 @media screen and (min-width: 992px) {
   #block-faq-categories ul li a,
   .block-faq-categories ul li a {
     font-size: calc(1.275rem + 0.3vw);
   }
 }
-
 @media screen and (min-width: 992px) and (min-width: 1200px) {
   #block-faq-categories ul li a,
   .block-faq-categories ul li a {
@@ -115,7 +110,6 @@
 [dir=rtl] .faq-question-answer .faq-answer {
   padding-right: calc(1.375rem + 1.5vw);
 }
-
 @media (min-width: 1200px) {
   [dir=rtl] .faq-question-answer .faq-answer {
     padding-right: 2.5rem;

@@ -2,7 +2,7 @@ name: "Varbase FAQ"
 description: "Provides FAQ content type and related configuration. A frequently asked question and its answer."
 type: module
 package: Varbase
-core_version_requirement: ^9 || ^10
+core_version_requirement: ~10.1.0
 dependencies:
   - drupal:user
   - drupal:node
