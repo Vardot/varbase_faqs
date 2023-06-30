@@ -1,10 +1,5 @@
 # Ignore node modules
 node_modules
-/*/node_modules
-
-# Ignore Variables
-/css/variables.css
-/css/mixins/
 
 # Ignore vim swp files and gedit temp files
 *.swp
@@ -17,11 +12,6 @@ node_modules
 .settings
 .buildpath
 
-# netbeans settings files.
-nbproject
-/nbproject
-/nbproject/
-/nbproject/private/
 
 # Ignore OS settings files.
 .DS_Store*

@@ -3,7 +3,7 @@
  * Behaviors for the varbase_faqs.
  */
 
-(function ($, _, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.cat = {
     attach: function () {
       $(document).ready(function () {
@@ -14,4 +14,4 @@
       });
     }
   };
-})(window.jQuery, window._, window.Drupal);
+})(jQuery, window.Drupal);
