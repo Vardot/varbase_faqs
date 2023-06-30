@@ -1,0 +1,6 @@
+id: editor
+permissions:
+  - 'create faq content'
+  - 'delete any faq content'
+  - 'edit any faq content'
+  - 'view faq revisions'
