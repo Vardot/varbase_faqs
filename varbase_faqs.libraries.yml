@@ -1,6 +1,6 @@
 faq-styles:
-css:
-theme:
-css/theme/faq-styles.theme.css: {}
-js:
-js/script.js: {}
+  css:
+    theme:
+      css/theme/faq-styles.theme.css: { }
+  js:
+    js/script.js: { }
