@@ -1,7 +1,6 @@
 node_modules/**/*.css
 vendor/**/*.css
-**/libraries/
-**/*.min.css"
+**/*.min.css
 /css/variables.css
 /css/mixins/
 scss/*
@@ -10,7 +9,6 @@ fonts/*
 js/*
 src/*
 tests/*
-scripts/*
 config/**/*.yml
 *.yml
 .*

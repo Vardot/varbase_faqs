@@ -1,0 +1,4 @@
+id: authenticated
+permissions:
+  - 'delete own faq content'
+  - 'edit own faq content'

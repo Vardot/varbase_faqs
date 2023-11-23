@@ -1,0 +1,7 @@
+id: site_admin
+permissions:
+  - 'create faq content'
+  - 'delete any faq content'
+  - 'edit any faq content'
+  - 'revert faq revisions'
+  - 'view faq revisions'
