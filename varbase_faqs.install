@@ -36,6 +36,9 @@ function varbase_faqs_install() {
   \Drupal::classResolver()
     ->getInstanceFromDefinition(EntityDefinitionUpdateManager::class)
     ->applyUpdates();
+
+  // Add permissions.
+  ModuleInstallerFactory::addPermissions('varbase_faqs');
 }
 
 /**
