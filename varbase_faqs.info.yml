@@ -1,5 +1,5 @@
-name: "Varbase FAQ"
-description: "Provides FAQ content type and related configuration. A frequently asked question and its answer."
+name: Varbase FAQ
+description: Provides FAQ content type and related configuration. A frequently asked question and its answer.
 type: module
 package: Varbase
 core_version_requirement: ~10
