@@ -8,6 +8,10 @@
 use Vardot\Entity\EntityDefinitionUpdateManager;
 use Vardot\Installer\ModuleInstallerFactory;
 
+// Include all helpers and updates.
+include_once __DIR__ . '/includes/helpers.inc';
+include_once __DIR__ . '/includes/updates.inc';
+
 /**
  * Implements hook_install().
  */
@@ -19,16 +23,9 @@ function varbase_faqs_install() {
 
   // Install optional configs.
   ModuleInstallerFactory::importConfigsFromScanedDirectory('varbase_faqs', '/^field.storage.*\\.(yml)$/i');
-  ModuleInstallerFactory::importConfigsFromScanedDirectory('varbase_faqs', '/^.*(settings.yml)$/i');
 
-  $faq_settings = \Drupal::configFactory()->getEditable('faq.settings');
-
-  $faq_settings->set('display', 'hide_answer')
-    ->set('show_expand_all', 1)
-    ->set('back_to_top', '')
-    ->set('disable_node_links', 1)
-    ->set('category_display', 'none')
-    ->save();
+  // Configure FAQ settings.
+  varbase_faqs__configure_faq_settings();
 
   // --------------------------------------------------------------------------.
   // Entity updates to clear up any mismatched entity and/or field definitions
@@ -39,15 +36,4 @@ function varbase_faqs_install() {
 
   // Add permissions.
   ModuleInstallerFactory::addPermissions('varbase_faqs');
-}
-
-/**
- * Issue #3272287: Switch to use the Module Installer Factory.
- *
- * In the Varbase FAQs module.
- */
-function varbase_faqs_update_90001() {
-  // Set the weight of the module after installation of list of modules.
-  // To make sure that any hook or event subscriber workers after all used modules.
-  ModuleInstallerFactory::setModuleWeightAfterInstallation('varbase_faqs');
 }
