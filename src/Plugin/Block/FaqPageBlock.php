@@ -62,6 +62,13 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $entityTypeManager;
 
   /**
+   * The renderer.
+   *
+   * @var \Drupal\Core\Render\RendererInterface
+   */
+  protected $renderer;
+
+  /**
    * Constructs a new FAQs List Block.
    *
    * @param array $configuration
