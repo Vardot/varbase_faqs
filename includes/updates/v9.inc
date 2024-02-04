@@ -17,3 +17,17 @@ function varbase_faqs_update_90001() {
   // To make sure that any hook or event subscriber workers after all used modules.
   ModuleInstallerFactory::setModuleWeightAfterInstallation('varbase_faqs');
 }
+
+/**
+ * Issue #3419067: Remove (Deprecated) Rabbit Hole nodes module.
+ *
+ * And changed refactored config schema.
+ */
+function varbase_faqs_update_90002() {
+
+  $varbase_faqs_config = [
+    'rabbit_hole.behavior_settings.node.faq',
+  ];
+
+  ModuleInstallerFactory::importConfigsFromList('varbase_faqs', $varbase_faqs_config, 'config/optional');
+}
