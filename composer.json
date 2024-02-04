@@ -35,7 +35,7 @@
     "vardot/module-installer-factory": "~1",
     "drupal/varbase_layout_builder": "~10.1.0",
     "drupal/faq": "~1",
-    "drupal/rabbit_hole": "~1 || ~2",
+    "drupal/rabbit_hole": "~2",
     "drupal/length_indicator": "~1",
     "drupal/advanced_text_formatter": "~2 || ~3",
     "drupal/maxlength": "~2"
