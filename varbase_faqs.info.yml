@@ -10,7 +10,7 @@ dependencies:
   - drupal:block
   - drupal:path
   - faq:faq
-  - rabbit_hole:rh_node
+  - rabbit_hole:rabbit_hole
 install:
   - menu_ui
   - length_indicator

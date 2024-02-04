@@ -4,5 +4,7 @@ dependencies: {}
 id: node_type_faq
 action: page_redirect
 allow_override: 0
-redirect: /faqs
-redirect_code: 301
+configuration:
+  redirect: '/faqs'
+  redirect_code: 301
+  redirect_fallback_action: access_denied
