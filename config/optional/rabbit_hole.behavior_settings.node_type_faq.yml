@@ -1,10 +1,13 @@
 langcode: en
 status: true
-dependencies: {}
+dependencies: {  }
 id: node_type_faq
+targetEntityType: null
+bundle: null
 action: page_redirect
-allow_override: 0
+no_bypass: null
+bypass_message: null
 configuration:
-  redirect: '/faqs'
+  redirect: /faqs
   redirect_code: 301
   redirect_fallback_action: access_denied
