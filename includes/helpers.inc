@@ -7,6 +7,8 @@
  * Add custom needed helper functions.
  */
 
+use Vardot\Installer\ModuleInstallerFactory;
+
 /**
  * Configure FAQ settings.
  */
@@ -19,4 +21,10 @@ function varbase_faqs__configure_faq_settings() {
     ->set('disable_node_links', 1)
     ->set('category_display', 'none')
     ->save();
+
+  $varbase_faqs_config = [
+    'rabbit_hole.behavior_settings.node.faq',
+  ];
+
+  ModuleInstallerFactory::importConfigsFromList('varbase_faqs', $varbase_faqs_config, 'config/optional');
 }

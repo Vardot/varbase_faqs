@@ -1,12 +1,14 @@
 langcode: en
 status: true
-dependencies: {  }
-id: node_type_faq
-targetEntityType: null
-bundle: null
+dependencies:
+  config:
+    - node.type.faq
+id: node.faq
+targetEntityType: node
+bundle: faq
 action: page_redirect
-no_bypass: null
-bypass_message: null
+no_bypass: false
+bypass_message: false
 configuration:
   redirect: /faqs
   redirect_code: 301
