@@ -32,6 +32,6 @@
     "drupal/rabbit_hole": "~2",
     "drupal/length_indicator": "~1",
     "drupal/advanced_text_formatter": "~2 || ~3",
-    "drupal/maxlength": "~2"
+    "drupal/maxlength": "~2 || ~3"
   }
 }
