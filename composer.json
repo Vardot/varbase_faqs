@@ -24,14 +24,14 @@
   },
   "require": {
     "drupal/core": "~10.4.0 || ~11.1.0",
-    "vardot/varbase-patches": "~10",
+    "vardot/varbase-patches": "10.1.x-dev",
     "vardot/entity-definition-update-manager": "~1",
     "vardot/module-installer-factory": "~1",
-    "drupal/varbase_layout_builder": "~10.1.0",
+    "drupal/varbase_layout_builder": "~10.2.0 || 10.2.x-dev",
     "drupal/faq": "~1",
     "drupal/rabbit_hole": "~2",
     "drupal/length_indicator": "~1",
-    "drupal/advanced_text_formatter": "~2 || ~3",
+    "drupal/advanced_text_formatter": "~3",
     "drupal/maxlength": "~2 || ~3"
   }
 }
