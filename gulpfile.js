@@ -22,7 +22,9 @@ function compile () {
     indentType: 'space',
     indentWidth: 2,
     linefeed: 'lf',
-    sourceMap: false
+    sourceMap: false,
+    quietDeps: true,
+    silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'legacy-js-api']
   };
 
   return gulp.src([paths.scss.src])

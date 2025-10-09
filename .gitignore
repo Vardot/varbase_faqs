@@ -2,6 +2,9 @@
 node_modules
 /*/node_modules
 
+# Ignore Yarn 4.x
+.yarn/
+
 # Ignore Variables
 /css/variables.css
 /css/mixins/
