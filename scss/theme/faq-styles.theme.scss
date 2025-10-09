@@ -1,6 +1,6 @@
 // Varbase Frequently Asked Questions style.
 // -----------------------------------------------------------------------------
-@import "../defaults";   // Global defaults.
+@use "../defaults" as *;   // Global defaults.
 // -----------------------------------------------------------------------------
 
 .faq-question-answer {

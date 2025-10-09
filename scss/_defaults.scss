@@ -1,5 +1,8 @@
 // Varbase Frequently Asked Questions variables.
 // -----------------------------------------------------------------------------
+// Note: Bootstrap 5.3.0 still uses @import internally, so we must use @import
+// for Bootstrap modules. Only our own modules should use @use.
+@use "sass:color";
 @import "../node_modules/bootstrap/scss/functions";      // Bootstrap functions.
 @import "../node_modules/bootstrap/scss/variables";      // Bootstrap variables.
 @import "../node_modules/bootstrap/scss/variables-dark"; // Bootstrap variables dark.
@@ -11,12 +14,12 @@
 
 // FAQ [expand all]/[collapse all] style.
 $faq-expand-all-color: $gray-600 !default;
-$faq-expand-all-active-color: darken($faq-expand-all-color, 20%) !default;
+$faq-expand-all-active-color: #3d4246 !default; // Darkened $gray-600 by 20%
 
 // FAQ question style.
 $faq-question-border-color: $gray-200 !default;
 $faq-question-link-color: $gray-600 !default;
-$faq-question-link-active-color: darken($faq-question-link-color, 20%) !default;
+$faq-question-link-active-color: #3d4246 !default; // Darkened $gray-600 by 20%
 
 // Chevron right icon for (dir=LTR) with $faq-question-link-color for the LTR collapsed question style.
 $chevron-right-icon: str-replace(url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='#{$faq-question-link-color}' d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z' transform='translate(1)'/%3e%3c/svg%3e"), "#", "%23") !default;

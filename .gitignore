@@ -1,5 +1,6 @@
 # Ignore node modules
 node_modules
+.yarn/
 
 # Ignore vim swp files and gedit temp files
 *.swp

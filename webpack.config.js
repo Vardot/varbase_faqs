@@ -16,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'css'),
-    pathinfo: true,
+    pathinfo: false,
     publicPath: '',
   },
   module: {
@@ -24,44 +24,32 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg)$/,
         exclude: /sprite\.svg$/,
-        type: 'javascript/auto',
-        use: [{
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]', //?[contenthash]
-              outputPath: ''
-            },
-          },
-          {
-            loader: 'img-loader',
-            options: {
-              enabled: !isDev,
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: '[path][name][ext]'
+        }
       },
       {
         test: /\.(css|scss)$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              name: '[name].[ext]?[hash]',
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
             options: {
               sourceMap: isDev,
               importLoaders: 2,
-              url: (url) => {
-                // Don't handle sprite svg
-                if (url.includes('sprite.svg')) {
-                  return false;
-                }
+              url: {
+                filter: (url) => {
+                  // Don't handle sprite svg
+                  if (url.includes('sprite.svg')) {
+                    return false;
+                  }
 
-                return true;
-              },
+                  return true;
+                }
+              }
             },
           },
           {
@@ -88,6 +76,10 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: isDev,
+              sassOptions: {
+                quietDeps: true, // Suppress deprecation warnings from dependencies
+                silenceDeprecations: ['import', 'global-builtin', 'color-functions'], // Silence specific deprecations
+              },
               // Global SCSS imports:
               additionalData: `
                 @use "sass:color";
