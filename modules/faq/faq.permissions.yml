@@ -1,0 +1,10 @@
+administer faq:
+  title: 'Administer FAQ module'
+  description: 'Allows user to administer FAQ module settings.'
+  restrict access: true
+administer faq order:
+  title: 'Order FAQ'
+  description: 'Allows user to order FAQ entities.'
+view faq page:
+  title: 'View FAQ pages'
+  description: 'Allows user to view FAQ pages.'

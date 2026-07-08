@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Allows users to create a FAQ page.
+ *
+ * Questions and answers are displayed in different styles, according to the
+ * settings.
+ *
+ * Hook implementations live in \Drupal\faq\Hook\FaqHooks. Only non-hook
+ * procedural callbacks remain in this file.
+ */
+
+/**
+ * Sets the rebuild of the form in the FAQ Settings - Weight tab.
+ *
+ * Form #submit callback.
+ *
+ * @param array $form
+ *   Array, containing the form structure.
+ * @param array $form_state
+ *   The 'rebuild' key inside $form_state['rebuild'] structure, overrides the
+ *   'redirect' key: when it is set to TRUE, the form will be rebuilt from
+ *   scratch and displayed on screen.
+ */
+function faq_order_settings_choose_cat_form_submit($form, &$form_state) {
+  $form_state['rebuild'] = TRUE;
+}
