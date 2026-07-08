@@ -1,0 +1,6 @@
+name: 'Varbase FAQ'
+description: 'Provides a Frequently Asked Questions (FAQ) content type and page for Varbase, powered by the FAQ module. Applying this recipe installs the FAQ module and the Varbase FAQ configuration.'
+type: 'Content type'
+install:
+  - faq
+  - varbase_faqs

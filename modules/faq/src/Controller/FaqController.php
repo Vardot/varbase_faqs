@@ -1,68 +1,42 @@
 <?php
 
-namespace Drupal\varbase_faqs\Plugin\Block;
+namespace Drupal\faq\Controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Drupal\faq\FaqHelper;
-use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Database\Query\Condition;
 use Drupal\Component\Render\FormattableMarkup;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Database\Connection;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Database\Query\Condition;
+use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Render\RendererInterface;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\LinkGeneratorInterface;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\faq\FaqHelper;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Provides a simple block.
- *
- * @Block(
- *   id = "faqs_list",
- *   admin_label = @Translation("FAQs List")
- * )
+ * Controller routines for FAQ routes.
  */
-class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class FaqController extends ControllerBase {
 
   /**
-   * Active database connection.
+   * The active database connection.
    *
    * @var \Drupal\Core\Database\Connection
    */
   protected $database;
 
   /**
-   * Contains the configuration object factory.
+   * The configuration factory.
    *
    * @var \Drupal\Core\Config\ConfigFactoryInterface
    */
-  protected $configFactory;
-
-  /**
-   * The module handler service.
-   *
-   * @var \Drupal\Core\Extension\ModuleHandlerInterface
-   */
-  protected $moduleHandler;
-
-  /**
-   * The language manager service.
-   *
-   * @var \Drupal\Core\Language\LanguageManagerInterface
-   */
-  protected $languageManager;
-
-  /**
-   * The entity type manager.
-   *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
-   */
-  protected $entityTypeManager;
+  protected $config;
 
   /**
    * The renderer.
@@ -72,6 +46,20 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $renderer;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The language manager service.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * The link generator service.
    *
    * @var \Drupal\Core\Utility\LinkGeneratorInterface
@@ -79,66 +67,70 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
   protected $linkGenerator;
 
   /**
-   * Constructs a new FAQs List Block.
+   * Constructs a FaqController object.
    *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
    * @param \Drupal\Core\Database\Connection $database
-   *   The database connection to be used.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The factory for configuration objects.
-   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
-   *   The module handler service.
-   * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
-   *   The language manager service.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager service.
+   *   The active database connection.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config
+   *   The configuration factory.
    * @param \Drupal\Core\Render\RendererInterface $renderer
    *   The renderer.
-   * @param \Drupal\Core\Utility\LinkGeneratorInterface $link_generator
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The language manager service.
+   * @param \Drupal\Core\Utility\LinkGeneratorInterface $linkGenerator
    *   The link generator service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, Connection $database, ConfigFactoryInterface $config_factory, ModuleHandlerInterface $module_handler, LanguageManagerInterface $language_manager, EntityTypeManagerInterface $entity_type_manager, RendererInterface $renderer, LinkGeneratorInterface $link_generator) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
+  public function __construct(
+    Connection $database,
+    ConfigFactoryInterface $config,
+    RendererInterface $renderer,
+    EntityTypeManagerInterface $entityTypeManager,
+    LanguageManagerInterface $languageManager,
+    LinkGeneratorInterface $linkGenerator,
+  ) {
     $this->database = $database;
-    $this->configFactory = $config_factory;
-    $this->moduleHandler = $module_handler;
-    $this->languageManager = $language_manager;
-    $this->entityTypeManager = $entity_type_manager;
+    $this->config = $config;
     $this->renderer = $renderer;
-    $this->linkGenerator = $link_generator;
+    $this->entityTypeManager = $entityTypeManager;
+    $this->languageManager = $languageManager;
+    $this->linkGenerator = $linkGenerator;
   }
 
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  public static function create(ContainerInterface $container) {
     return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
+    // Load the service required to construct this class.
       $container->get('database'),
       $container->get('config.factory'),
-      $container->get('module_handler'),
-      $container->get('language_manager'),
-      $container->get('entity_type.manager'),
       $container->get('renderer'),
+      $container->get('entity_type.manager'),
+      $container->get('language_manager'),
       $container->get('link_generator')
     );
   }
 
   /**
-   * Implements \Drupal\block\BlockBase::blockBuild().
+   * Function to display the faq page.
+   *
+   * @param int $tid
+   *   Default is 0, determines if the questions and answers on the page
+   *   will be shown according to a category or non-categorized.
+   * @param string $faq_display
+   *   Optional parameter to override default question layout setting.
+   * @param string $category_display
+   *   Optional parameter to override default category layout setting.
+   *
+   * @return array
+   *   The page with FAQ questions and answers.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
-  public function build() {
-    $tid = 0;
-    $faq_display = '';
-    $category_display = '';
-    $faq_settings = $this->configFactory->get('faq.settings');
+  public function faqPage($tid = 0, $faq_display = '', $category_display = '') {
+    $faq_settings = $this->config->get('faq.settings');
 
     $output = $output_answers = '';
 
@@ -148,7 +140,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
     $build['#title'] = $faq_settings->get('title');
 
-    if (!$this->moduleHandler->moduleExists('taxonomy')) {
+    if (!$this->moduleHandler()->moduleExists('taxonomy')) {
       $tid = 0;
     }
 
@@ -156,7 +148,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
     $use_categories = $faq_settings->get('use_categories');
     $category_display = $faq_settings->get('category_display');
     // If taxonomy doesn't installed, do not use categories.
-    if (!$this->moduleHandler->moduleExists('taxonomy')) {
+    if (!$this->moduleHandler()->moduleExists('taxonomy')) {
       $use_categories = FALSE;
     }
 
@@ -190,7 +182,11 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
       if ($default_sorting == 'ASC') {
         $default_weight = 1000000;
       }
+      // Works, but involves variable concatenation - safe though, since
+      // $default_weight is an integer.
       $query->addExpression("COALESCE(w.weight, $default_weight)", 'effective_weight');
+      // Doesn't work in Postgres.
+      // $query->addExpression('COALESCE(w.weight, CAST(:default_weight as SIGNED))', 'effective_weight', array(':default_weight' => $default_weight));.
       $query->orderBy('effective_weight', 'ASC')
         ->orderBy('d.sticky', 'DESC');
       if ($default_sorting == 'ASC') {
@@ -202,7 +198,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
       // Only need the nid column.
       $nids = $query->execute()->fetchCol();
-      $data = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+      $data = Node::loadMultiple($nids);
       foreach ($data as &$node) {
         $node = ($node->hasTranslation($langcode)) ? $node->getTranslation($langcode) : $node;
       }
@@ -236,7 +232,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
 
       // If we're viewing a specific category/term.
       if (!empty($tid)) {
-        if ($term = $this->entityTypeManager->getStorage('taxonomy_term')->load($tid)) {
+        if ($term = Term::load($tid)) {
           $title = $faq_settings->get('title');
 
           $build['#title'] = ($title . ($title ? ' - ' : '') . $term->getName());
@@ -256,7 +252,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
       }
 
       $list_style = $faq_settings->get('category_listing');
-      $vocabularies = $this->entityTypeManager->getStorage('taxonomy_vocabulary')->loadMultiple();
+      $vocabularies = Vocabulary::loadMultiple();
       $vocab_omit = $faq_settings->get('omit_vocabulary');
       $items = [];
       $vocab_items = [];
@@ -309,6 +305,92 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
   }
 
   /**
+   * Define the elements for the FAQ Settings page - order tab.
+   *
+   * @param int|null $tid
+   *   The category id of the FAQ page to reorder.
+   *
+   * @return array
+   *   The form code, before being converted to HTML format.
+   */
+  public function orderPage($tid = NULL) {
+
+    $faq_settings = $this->config->get('faq.settings');
+    $build = [];
+
+    $build['#attached']['library'][] = 'faq/faq-scripts';
+    $build['#attached']['drupalSettings']['faqSettings']['hide_qa_accordion'] = $faq_settings->get('hide_qa_accordion');
+    $build['#attached']['drupalSettings']['faqSettings']['category_hide_qa_accordion'] = $faq_settings->get('category_hide_qa_accordion');
+    $build['#attached']['library'][] = 'faq/faq-css';
+
+    $build['faq_order'] = $this->formBuilder()->getForm('Drupal\faq\Form\OrderForm');
+
+    return $build;
+  }
+
+  /**
+   * Renders the form for the FAQ Settings page - General tab.
+   *
+   * @return array
+   *   The form code inside the $build array.
+   */
+  public function generalSettings() {
+    $build = [];
+
+    $build['faq_general_settings_form'] = $this->formBuilder()->getForm('Drupal\faq\Form\GeneralForm');
+
+    return $build;
+  }
+
+  /**
+   * Renders the form for the FAQ Settings page - Questions tab.
+   *
+   * @return array
+   *   The form code inside the $build array.
+   */
+  public function questionsSettings() {
+    $faq_settings = $this->config->get('faq.settings');
+
+    $build = [];
+
+    $build['#attached']['library'][] = 'faq/faq-scripts';
+    $build['#attached']['drupalSettings']['faqSettings']['hide_qa_accordion'] = $faq_settings->get('hide_qa_accordion');
+    $build['#attached']['drupalSettings']['faqSettings']['category_hide_qa_accordion'] = $faq_settings->get('category_hide_qa_accordion');
+
+    $build['faq_questions_settings_form'] = $this->formBuilder()->getForm('Drupal\faq\Form\QuestionsForm');
+
+    return $build;
+  }
+
+  /**
+   * Renders the form for the FAQ Settings page - Categories tab.
+   *
+   * @return array
+   *   The form code inside the $build array.
+   */
+  public function categoriesSettings() {
+    $faq_settings = $this->config->get('faq.settings');
+
+    $build = [];
+
+    $build['#attached']['library'][] = 'faq/faq-scripts';
+    $build['#attached']['drupalSettings']['faqSettings']['hide_qa_accordion'] = $faq_settings->get('hide_qa_accordion');
+    $build['#attached']['drupalSettings']['faqSettings']['category_hide_qa_accordion'] = $faq_settings->get('category_hide_qa_accordion');
+
+    if (!$this->moduleHandler()->moduleExists('taxonomy')) {
+      $this->messenger()->addError($this->t('Categorization of questions will not work without the "taxonomy" module being enabled.'));
+    }
+
+    $build['faq_categories_settings_form'] = $this->formBuilder()->getForm('Drupal\faq\Form\CategoriesForm');
+
+    return $build;
+  }
+
+  /* ****************************************************************
+   * PRIVATE HELPER FUCTIONS
+   * *************************************************************** */
+
+  /**
    * Display FAQ questions and answers filtered by category.
    *
    * @param string $faq_display
@@ -328,7 +410,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
    */
   private function _displayFaqByCategory($faq_display, $category_display, $term, $display_header, &$output, &$output_answers) {
     $langcode = $this->languageManager->getCurrentLanguage()->getId();
-    $default_sorting = $this->configFactory->get('faq.settings')->get('default_sorting');
+    $default_sorting = $this->config->get('faq.settings')->get('default_sorting');
 
     $term_id = $term->id();
 
@@ -350,6 +432,8 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
     // Works, but involves variable concatenation - safe though, since
     // $default_weight is an integer.
     $query->addExpression("COALESCE(w.weight, $default_weight)", 'effective_weight');
+    // Doesn't work in Postgres.
+    // $query->addExpression('COALESCE(w.weight, CAST(:default_weight as SIGNED))', 'effective_weight', array(':default_weight' => $default_weight));.
     $query->orderBy('effective_weight', 'ASC')
       ->orderBy('d.sticky', 'DESC');
     if ($default_sorting == 'ASC') {
@@ -362,7 +446,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
     // We only want the first column, which is nid, so that we can load all
     // related nodes.
     $nids = $query->execute()->fetchCol();
-    $data = $this->entityTypeManager->getStorage('node')->loadMultiple($nids);
+    $data = Node::loadMultiple($nids);
     foreach ($data as &$node) {
       $node = ($node->hasTranslation($langcode)) ? $node->getTranslation($langcode) : $node;
     }
@@ -437,7 +521,10 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   An array of a list of terms indented according to the term depth.
    */
   private function _getIndentedFaqTerms($vid, $tid) {
-    $faq_settings = $this->configFactory->get('faq.settings');
+    // If ($this->moduleHandler()->moduleExists('pathauto')) {
+    // pathauto does't exists in D8 yet
+    // }.
+    $faq_settings = $this->config->get('faq.settings');
 
     $display_faq_count = $faq_settings->get('count');
     $hide_child_terms = $faq_settings->get('hide_child_terms');
@@ -472,6 +559,9 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
         if ($term_node_count > 0) {
           $path = Url::fromUserInput('/faq-page/' . $term_id);
 
+          // Pathauto is not exists in D8 yet
+          // if (!\Drupal::service('path.alias_manager.cached')->getPathAlias(arg(0) . '/' . $tid) && $this->moduleHandler()->moduleExists('pathauto')) {
+          // }.
           if ($display_faq_count) {
             $count = $term_node_count;
             if ($hide_child_terms) {
@@ -485,6 +575,9 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
         }
         else {
           $cur_item = $term->getName() . $desc;
+        }
+        if (!empty($term_image)) {
+          $cur_item .= '<div class="clear-block"></div>';
         }
 
         $term_items = [];
@@ -502,10 +595,10 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
   }
 
   /**
-   * Renders the output of getIndentedFaqTerms to an HTML list.
+   * Renders the output of getIntendedFaqTerms to HTML list.
    *
    * @param array $items
-   *   The structured array made by the getIndentedFaqTerms method.
+   *   The structured array made by getIntendedTerms function.
    * @param string $list_style
    *   List style type: ul or ol.
    *
@@ -513,6 +606,7 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   HTML formatted output.
    */
   private function _renderCategoriesToList($items, $list_style) {
+
     $list = [];
 
     foreach ($items as $item) {
@@ -530,13 +624,6 @@ class FaqPageBlock extends BlockBase implements ContainerFactoryPluginInterface 
     ];
 
     return $this->renderer->render($render);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCacheTags() {
-    return Cache::mergeTags(parent::getCacheTags(), ['node_list']);
   }
 
 }

@@ -1,0 +1,8 @@
+name: 'Varbase FAQ Test'
+description: 'Sets up the site for the Varbase FAQ automated tests on a Standard profile (Varbase FAQ is enabled by the CI before running this recipe).'
+type: 'Testing'
+config:
+  actions:
+    user.role.authenticated:
+      grantPermissions:
+        - 'access administration pages'

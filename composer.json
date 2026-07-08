@@ -16,10 +16,8 @@
     "source": "http://cgit.drupalcode.org/varbase_faqs"
   },
   "require": {
-    "drupal/core": "~10.6.0 || ~11.3.0",
-    "vardot/varbase-patches": "~9",
-    "drupal/varbase_layout_builder": "~9 || ~10",
-    "drupal/faq": "~1",
+    "drupal/core": "~11.4.0",
+    "drupal/varbase_layout_builder": "~10.0",
     "drupal/rabbit_hole": "~2",
     "drupal/length_indicator": "~1",
     "drupal/advanced_text_formatter": "~2 || ~3",

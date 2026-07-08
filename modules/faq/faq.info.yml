@@ -1,0 +1,8 @@
+name: 'Frequently Asked Questions'
+type: module
+description: 'Manages configuration of questions for a FAQ page.'
+core_version_requirement: ^11
+package: Varbase
+dependencies:
+  - drupal:node
+configure: faq.faq-admin
