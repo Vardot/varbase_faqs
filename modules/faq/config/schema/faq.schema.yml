@@ -1,0 +1,87 @@
+# Schema for the configuration files of the Varbase FAQ (faq) submodule.
+
+faq.settings:
+  type: config_object
+  label: 'FAQ settings'
+  mapping:
+    title:
+      type: label
+      label: 'FAQ page title'
+    description:
+      type: text
+      label: 'FAQ page description'
+    custom_breadcrumbs:
+      type: boolean
+      label: 'Use custom breadcrumbs'
+    display:
+      type: string
+      label: 'Questions and answers display'
+    question_listing:
+      type: string
+      label: 'Questions listing'
+    qa_mark:
+      type: boolean
+      label: 'Enable Q/A markers'
+    question_label:
+      type: label
+      label: 'Question label'
+    answer_label:
+      type: label
+      label: 'Answer label'
+    question_length:
+      type: string
+      label: 'Question length'
+    question_long_form:
+      type: boolean
+      label: 'Long-form questions'
+    hide_qa_accordion:
+      type: boolean
+      label: 'Hide Q/A accordion'
+    show_expand_all:
+      type: boolean
+      label: 'Show expand/collapse all links'
+    use_teaser:
+      type: boolean
+      label: 'Use teaser for answers'
+    back_to_top:
+      type: label
+      label: 'Back to top link text'
+    disable_node_links:
+      type: boolean
+      label: 'Disable node links'
+    default_sorting:
+      type: string
+      label: 'Default sorting'
+    use_categories:
+      type: boolean
+      label: 'Categorize questions'
+    category_display:
+      type: string
+      label: 'Categories display'
+    category_listing:
+      type: string
+      label: 'Categories listing'
+    category_hide_qa_accordion:
+      type: boolean
+      label: 'Category hide Q/A accordion'
+    count:
+      type: boolean
+      label: 'Show question count per category'
+    answer_category_name:
+      type: boolean
+      label: 'Show answer category name'
+    group_questions_top:
+      type: boolean
+      label: 'Group questions at the top'
+    hide_child_terms:
+      type: boolean
+      label: 'Hide child terms'
+    show_term_page_children:
+      type: boolean
+      label: 'Show sub-category questions'
+    omit_vocabulary:
+      type: sequence
+      label: 'Omitted vocabularies'
+      sequence:
+        type: string
+        label: 'Vocabulary'

@@ -5,11 +5,11 @@
  * Install, update and uninstall functions for the Varbase FAQs module.
  */
 
+use Drupal\Core\Recipe\Recipe;
+use Drupal\Core\Recipe\RecipeRunner;
 use Vardot\Entity\EntityDefinitionUpdateManager;
-use Vardot\Installer\ModuleInstallerFactory;
 
-// Include all helpers and updates.
-include_once __DIR__ . '/includes/helpers.inc';
+// Include all updates.
 include_once __DIR__ . '/includes/updates.inc';
 
 /**
@@ -17,23 +17,74 @@ include_once __DIR__ . '/includes/updates.inc';
  */
 function varbase_faqs_install() {
 
-  // Processor for install: in varbase_faqs.info.yml file using ModuleInstallerFactory.
-  // ---------------------------------------------------------------------------.
-  ModuleInstallerFactory::installList('varbase_faqs');
+  // Install the default modules and configuration and apply the FAQ settings
+  // via the default recipe. The FAQ content type is provided by the bundled
+  // Varbase FAQ (faq) submodule installed by the recipe.
+  $default_recipe = Recipe::createFromDirectory(__DIR__ . '/recipes/default');
+  RecipeRunner::processRecipe($default_recipe);
 
-  // Install optional configs.
-  ModuleInstallerFactory::importConfigsFromScanedDirectory('varbase_faqs', '/^field.storage.*\\.(yml)$/i');
+  // Ensure the FAQ content type, its fields and displays from the bundled faq
+  // submodule are fully imported. While the recipe installs its modules, the
+  // faq module is installed before the other modules its default config entities
+  // depend on (e.g. rabbit_hole), so some of those config entities are silently
+  // skipped for unmet dependencies during the module install. Re-running the
+  // module's default config install once every module is present creates any
+  // config that is still missing (it is a no-op for config that already exists).
+  \Drupal::service('config.installer')->installDefaultConfig('module', 'faq');
 
-  // Configure FAQ settings.
-  varbase_faqs__configure_faq_settings();
+  // Grant the default FAQ permissions to the Varbase roles that are present on
+  // this site. This is done here rather than as recipe config actions so the
+  // module also installs cleanly on a standard Drupal site, where these roles
+  // do not exist (a recipe grantPermissions action hard-fails on a missing
+  // role). On a Varbase site every listed role exists and is granted.
+  $role_permissions = [
+    'authenticated' => [
+      'delete own faq content',
+      'edit own faq content',
+    ],
+    'editor' => [
+      'create faq content',
+      'delete any faq content',
+      'edit any faq content',
+      'view faq revisions',
+    ],
+    'content_admin' => [
+      'create faq content',
+      'delete any faq content',
+      'edit any faq content',
+      'revert faq revisions',
+      'view faq revisions',
+    ],
+    'site_admin' => [
+      'create faq content',
+      'delete any faq content',
+      'edit any faq content',
+      'revert faq revisions',
+      'view faq revisions',
+    ],
+    'seo_admin' => [
+      'create faq content',
+      'delete any faq content',
+      'edit any faq content',
+      'view faq revisions',
+    ],
+  ];
 
-  // --------------------------------------------------------------------------.
+  // The FAQ content type (and therefore its dynamic node permissions) is
+  // created by the recipe in this same request, so reset the node type storage
+  // cache before granting the permissions.
+  \Drupal::entityTypeManager()->getStorage('node_type')->resetCache();
+
+  $role_storage = \Drupal::entityTypeManager()->getStorage('user_role');
+  foreach ($role_permissions as $role_id => $permissions) {
+    if ($role_storage->load($role_id)) {
+      user_role_grant_permissions($role_id, $permissions);
+    }
+  }
+
   // Entity updates to clear up any mismatched entity and/or field definitions
-  // And Fix changes were detected in the entity type and field definitions.
+  // and fix changes detected in the entity type and field definitions.
   \Drupal::classResolver()
     ->getInstanceFromDefinition(EntityDefinitionUpdateManager::class)
     ->applyUpdates();
-
-  // Add permissions.
-  ModuleInstallerFactory::addPermissions('varbase_faqs');
 }

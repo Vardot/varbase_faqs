@@ -140,7 +140,7 @@ class OrderForm extends ConfigFormBase {
           $form['choose_cat']['search'] = [
             '#type' => 'submit',
             '#value' => $this->t('Search'),
-            '#submit' => ['faq_order_settings_choose_cat_form_submit'],
+            '#submit' => ['::orderSettingsChooseCatSubmit'],
           ];
         }
       }
@@ -247,6 +247,18 @@ class OrderForm extends ConfigFormBase {
 
       parent::submitForm($form, $form_state);
     }
+  }
+
+  /**
+   * Rebuilds the form on the FAQ order 'Choose category' search submit.
+   *
+   * @param array $form
+   *   The form structure.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  public function orderSettingsChooseCatSubmit(array &$form, FormStateInterface $form_state): void {
+    $form_state->setRebuild(TRUE);
   }
 
 }
