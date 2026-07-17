@@ -1,6 +1,19 @@
-name: 'Varbase FAQ'
-description: 'Provides a Frequently Asked Questions (FAQ) content type and page for Varbase, powered by the FAQ module. Applying this recipe installs the FAQ module and the Varbase FAQ configuration.'
+name: 'Varbase FAQ - Default'
+description: 'A recipe to manage the default installed modules and configuration for Varbase FAQ. Installs the required modules and applies the FAQ settings. The FAQ content type is provided by the bundled Varbase FAQ (faq) submodule. The FAQ permissions are granted per role on install for the Varbase roles present on the site.'
 type: 'Content type'
 install:
   - faq
-  - varbase_faqs
+  - rabbit_hole
+  - menu_ui
+  - length_indicator
+  - advanced_text_formatter
+  - maxlength
+config:
+  actions:
+    faq.settings:
+      simpleConfigUpdate:
+        display: hide_answer
+        show_expand_all: 1
+        back_to_top: ''
+        disable_node_links: 1
+        category_display: none

@@ -3,18 +3,3 @@ description: Provides FAQ content type and related configuration. A frequently a
 type: module
 package: Varbase
 core_version_requirement: ~11.4.0
-dependencies:
-  - drupal:user
-  - drupal:node
-  - drupal:text
-  - drupal:block
-  - drupal:path
-  - faq:faq
-  - rabbit_hole:rabbit_hole
-install:
-  - menu_ui
-  - length_indicator
-  - advanced_text_formatter
-  - maxlength
-  - varbase_layout_builder
-  - vlplb
