@@ -5,7 +5,7 @@
  * Extra step definitions for the Varbase FAQ (varbase_faqs) test suite.
  *
  * The suite reuses the shared Varbase step definitions (logging in as a named
- * user, becoming anonymous, opening admin pages) plus the built-in webship-js
+ * user, becoming anonymous, opening admin pages) plus the built-in varbase-e2e
  * steps (navigation, "I should see", web-first assertions). The only helper
  * that cannot be expressed with those is creating an FAQ node, because the
  * FAQ content type has its own add form at /node/add/faq with a different field
@@ -19,7 +19,7 @@ const {
   friendly,
   gotoUrl,
   waitForPageLoad,
-} = require('webship-js/tests/step-definitions/webship');
+} = require('@vardot/varbase-e2e/tests/step-definitions/varbase-e2e');
 
 /**
  * Run a step body and rethrow any failure as a tester-friendly error.
