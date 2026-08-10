@@ -3,7 +3,7 @@
 #
 #   1. Standard Drupal CI validation jobs (composer-lint, cspell, eslint, phpcs,
 #      phpstan) from the drupalci templates - all blocking.
-#   2. A webship-js BDD browser-test job (Playwright + Cucumber-js) running
+#   2. A varbase-e2e BDD browser-test job (Playwright + Cucumber-js) running
 #      tests/features/drupal/** against a Drupal Standard site with Varbase FAQ
 #      (and its bundled faq submodule) installed and a seeded FAQ node.
 ################################################################################
@@ -61,7 +61,7 @@ phpunit:
     - cp .cucumber.js.bak cucumber.js && rm .cucumber.js.bak
     - ./node_modules/.bin/playwright install --with-deps chromium
 
-webship-js-test:
+varbase-e2e-test:
   extends: .testing-job-base
   needs: [composer]
   services:
@@ -97,8 +97,8 @@ webship-js-test:
     - $CI_PROJECT_DIR/vendor/bin/drush --root=$CI_PROJECT_DIR/$_WEB_ROOT user:create authuser --mail="authuser@example.test" --password="dD.123123ddd" || true
     - !reference [.fragments, node_playwright]
   script:
-    - WEBSHIP_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
-    - node ./node_modules/webship-js/bin/generate-reports.js
+    - VARBASE_E2E_REPORT_DISABLE=1 ./node_modules/.bin/cucumber-js --config cucumber.js --tags "not @wip"
+    - node ./node_modules/@vardot/varbase-e2e/bin/generate-reports.js
         --json tests/reports/cucumber_report.json
         --out  tests/reports/cucumber_report.html
         --format all
